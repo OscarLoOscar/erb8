@@ -1,0 +1,27 @@
+"""
+URL configuration for config project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+# define endpoint
+from django.contrib import admin
+from django.urls import path,include
+
+# 2.Django 2次分流 -> RESTFul api -> /(Resources)/Endpoint -> 分endpoint
+# empty string + empty string 既分流，但無得用empty string，所以起個folder： pages
+urlpatterns = [
+    path('',include('pages.urls',namespace='pages')),
+    path('admin/', admin.site.urls),
+    path('listings/', include('listings.urls',namespace='listings')) 
+]
