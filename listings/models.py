@@ -26,5 +26,5 @@ class Listing(models.Model):
     ordering = ['-list_date']
     indexes = [models.Index(fields = ['list_date'])]
 
-  def __str__(self):
-      return self.title
+    def __str__(self):
+        return self.title
