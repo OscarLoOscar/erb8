@@ -1,6 +1,8 @@
 {% load static %}
+<!-- Template Tag : need to find static image or css-->
 <!DOCTYPE html>
 <html lang="en">
+  <!-- 中文： zh-Hant -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,18 +17,19 @@
     <title>BC Health Care</title>
   </head>
   <body>
-    {% comment %} topbar {% endcomment %} 
-    {% comment %} Django command {% endcomment %} 
-    {% include 'partials/_topbar.html' %} 
-    {% comment %} navbar {% endcomment %} 
-    {% include 'partials/_navbar.html' %} 
-    {% comment %} content {% endcomment %} 
-    {% block content %}
-    {% endblock %}
-    {% comment %} footer {% endcomment %} 
+    <!--  topbar -->
+    {% comment %} Django command {% endcomment %}
+    <!--   -->
+    {% include 'partials/_topbar.html' %}
+    <!--  navbar -->
+    {% include 'partials/_navbar.html' %}
+    <!--  content -->
+    {% block content %} {% endblock %}
+    <!--  footer -->
     {% include 'partials/_footer.html' %}
-    <script src={% static "/js/jquery-3.3.1.min.js" %}></script>
-    <script src={% static "/js/bootstrap.bundle.min.js" %}></script>
-    <script src={% static "/js/main.js" %}></script>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>

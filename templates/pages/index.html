@@ -1,21 +1,16 @@
 {% extends 'base.html' %}
-<!-- index main content -->
+<!-- load humanize-->
+{% load humanize %}
+<!-- index main content-->
 {% block content %}
-<!-- Showcase -->
 <section id="showcase">
   <div class="container text-center">
     <div class="home-search p-5">
       <div class="overlay p-5">
-        <h1 class="display-4 mb-4">Clinic Searching Just Got So Easy</h1>
-        <p class="lead">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae
-          quas, asperiores eveniet vel nostrum magnam voluptatum tempore!
-          Consectetur, id commodi!
-        </p>
+        <h1 class="display-4 mb-4">{{anything}}</h1>
+        <p class="lead">{{numbers}}</p>
         <div class="search">
-          {% comment %} fix {% endcomment %}
-          <form action {% 'listings:search' %}>
-            <!-- Form Row 1 -->
+          <form action="{% url 'listings:search' %}">
             <div class="form-row">
               <div class="col-md-12 mb-3">
                 <label class="sr-only">Keywords</label>
@@ -27,7 +22,6 @@
                 />
               </div>
             </div>
-            <!-- Form Row 2 -->
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label class="sr-only">District</label>
@@ -88,6 +82,119 @@
               Submit form
             </button>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="listings" class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-3">Inpatient medical services</h3>
+    <div class="row">
+      {% if listings %} {% for listing in listings %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card listing-preview">
+          <img
+            class="card-img-top"
+            src="{{ listing.photo_main.url }}"
+            alt="{{ listing.title }}"
+          />
+          <div class="card-img-overlay"></div>
+          <div class="card-body">
+            <div class="listing-heading text-center">
+              <h4 class="text-primary">{{ listing.title | title }}</h4>
+              <p>
+                <i class="fas fa-map-marker text-secondary"></i>
+                {{ listing.district }}
+              </p>
+            </div>
+            <hr />
+            <div class="row py-2 text-secondary">
+              <div class="col-6">
+                <i class="fas fa-th-large"></i>
+                Fee : {{listing.service|apnumber| capfirst}}
+              </div>
+              <div class="col-6">
+                <i class="fas fa-dumbbell"></i> {{ listing.services }}
+              </div>
+            </div>
+            <div class="row py-2 text-secondary">
+              <div class="col-6">
+                <i class="fas fa-bed"></i> Room : {{ listing.rooms }}
+              </div>
+              <div class="col-6">
+                <i class="fas fa-bath"></i> {{ listing.room_type }}
+              </div>
+            </div>
+            <hr />
+            <div class="row py-2 text-secondary">
+              <div class="col-12">
+                <i class="fas fa-user"></i> {{ listing.doctor }}
+              </div>
+            </div>
+            <div class="row text-secondary pb-2">
+              <div class="col-12">
+                <i class="fas fa-clock"></i> {{ listing.list_date | timesince}}
+              </div>
+            </div>
+            <hr />
+            <!-- when click this button : 要加listings id 入去-->
+            <a
+              href="{% url 'listings:listing' listing.id %}"
+              class="btn btn-primary btn-block"
+            >
+              More Info
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="col-12 text-center">
+        <h2>No Client Available</h2>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card listing-preview">
+          <img
+            class="card-img-top"
+            src="assets/img/clinics/clinic-3.jpg"
+            alt=""
+          />
+          <div class="card-img-overlay"></div>
+          <div class="card-body">
+            <div class="listing-heading text-center">
+              <h4 class="text-primary">VitalPath Wellness Clinic</h4>
+              <p>
+                <i class="fas fa-map-marker text-secondary"></i> Sham Shui Po
+              </p>
+            </div>
+            <hr />
+            <div class="row py-2 text-secondary">
+              <div class="col-6"><i class="fas fa-th-large"></i> Restrooms</div>
+              <div class="col-6"><i class="fas fa-dumbbell"></i> Treatment</div>
+            </div>
+            <div class="row py-2 text-secondary">
+              <div class="col-6"><i class="fas fa-bed"></i> Bedrooms</div>
+              <div class="col-6"><i class="fas fa-bath"></i> Bathrooms</div>
+            </div>
+            <hr />
+            <div class="row py-2 text-secondary">
+              <div class="col-12"><i class="fas fa-user"></i> Ms. Chan</div>
+            </div>
+            <div class="row text-secondary pb-2">
+              <div class="col-12">
+                <i class="fas fa-clock"></i> Reservation required
+              </div>
+            </div>
+            <hr />
+            <a href="listing.html" class="btn btn-primary btn-block"
+              >More Info</a
+            >
+          </div>
         </div>
       </div>
     </div>

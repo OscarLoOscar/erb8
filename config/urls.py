@@ -19,13 +19,14 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
+from debug_toolbar.toolbar import debug_toolbar_urls
 # 2.Django 2次分流 -> RESTFul api -> /(Resources)/Endpoint -> 分endpoint
 # empty string + empty string 既分流，但無得用empty string，所以起個folder： pages
 urlpatterns = [
     path('',include('pages.urls',namespace='pages')),
     path('admin/', admin.site.urls),
     path('listings/', include('listings.urls',namespace='listings')) 
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) + debug_toolbar_urls() # 要同一行，隔行會error
 
 admin.site.site_header = 'Clinic Administration'
 admin.site.site_title = 'Clinic Admin Portal'

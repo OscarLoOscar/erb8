@@ -2,16 +2,16 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
   <div class="container">
     <!-- <a class="navbar-brand" href="index.html"> -->
-      <a class="navbar-brand" href={% url 'pages:index' %}>
-      <img src={% static "img/logo.png" %} class="logo" alt="" />
-    </a>
+    <a class="navbar-brand" href={% url 'pages:index' %}>
+    <img src={% static "img/logo.png" %} class="logo" alt="" />
+  </a>
     <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavAltMarkup"
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavAltMarkup"
     >
-      <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <ul class="navbar-nav">
@@ -29,7 +29,7 @@
           <a class="nav-link" href={% url 'pages:about' %}>About</a>
         </li>
         <li {% if '/listings/' == request.path %} class="nav-item active mr-3" {% else %} class='nav-item me-3' {% endif %}>
-        {% comment %} <li class="nav-item mr-3"> {% endcomment %}
+        <li class="nav-item mr-3">
           {% comment %} fix {% endcomment %}
           <a class="nav-link" href={% url 'listings:index' %}>
             Inpatient medical services</a

@@ -9,5 +9,5 @@ class Doctor(models.Model):
   email = models.EmailField(max_length=50,unique=True,blank=False)
   is_mvp = models.BooleanField(default=True)
   hire_date = models.DateTimeField(auto_now_add =True)
-  def __str__(self):
+  def __str__(self): # Doctor display >> 影響display table 既Object既'文字表達方式' >> 咩意思 >> 影響display出<Patient: Patient object (1)>
     return self.name

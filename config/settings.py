@@ -34,24 +34,30 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# 註冊地方
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',# 裝完 django-debug-toolbar
     'clinic_app', # 加啱啱起既startapp XX(project name)
+    'django.contrib.humanize',
 ]
 
+# 註冊地方,先可以係localhost/admin見到
 APPLICATION_APPS = ['pages.apps.PagesConfig',
                     'doctors.apps.DoctorsConfig',
                     'listings.apps.ListingsConfig'
                     ]
 
-INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS
+THIRD_PARTY_APPS = ['debug_toolbar']# 裝完 django-debug-toolbar手動加, for development用
+
+INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,7 +74,7 @@ ROOT_URLCONF = 'config.urls' # 1.from config folder 然後入面既urls，第一
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',# 裝完 django-debug-toolbar
         # 'DIRS': [],
         'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
@@ -150,3 +156,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' # same on Large Integer
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
