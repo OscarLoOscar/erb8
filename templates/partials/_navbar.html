@@ -28,7 +28,7 @@
         <li {% if '/about' == request.path %} class="nav-item active mr-3" {% else %} class='nav-item me-3' {% endif %}>
           <a class="nav-link" href={% url 'pages:about' %}>About</a>
         </li>
-        <li {% if '/listings/' == request.path %} class="nav-item active mr-3" {% else %} class='nav-item me-3' {% endif %}>
+        <li {% if '/listings' == request.path %} class="nav-item active mr-3" {% else %} class='nav-item me-3' {% endif %}>
         <li class="nav-item mr-3">
           {% comment %} fix {% endcomment %}
           <a class="nav-link" href={% url 'listings:index' %}>

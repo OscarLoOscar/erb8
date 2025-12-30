@@ -1,9 +1,16 @@
 from django.shortcuts import render
+from listings.models import Listing
+from django.core.paginator import Paginator
 # Create your views here.
 # 3.最終分黎呢度，2個endpoint
 def listings(request):
   # print(request.path) # /listings/
-  return render(request,'listings/listings.html')
+  listings = Listing.objects.filter(is_published=True)
+  paginator = Paginator(listings,3)
+  page = request.GET.get('page')
+  paged_listings = paginator.get_page(page)
+  content = {'listings':paged_listings}
+  return render(request,'listings/listings.html',content)
 # ('pages/index.html')
 
 def listing(request,listing_id):
