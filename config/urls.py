@@ -27,7 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('listings/', include('listings.urls',namespace='listings')) 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) + debug_toolbar_urls() # 要同一行，隔行會error
-
+    
 admin.site.site_header = 'Clinic Administration'
 admin.site.site_title = 'Clinic Admin Portal'
 admin.site.index_title = 'Welcome to Clinic Portal'

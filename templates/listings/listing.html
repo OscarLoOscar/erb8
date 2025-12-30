@@ -80,16 +80,34 @@
         </div>
 
         <!-- Fields -->
-        <div class="row mb-5 fields text-center">
+        <div class="row mb-5 fields">
           <div class="col-md-12">
             <ul class="list-group list-group-flush">
               <li class="list-group-item text-secondary">
                 <i class="fas fa-money-bill-alt"></i> Inpatient Fee Estimate:
-                <span>$ {{listing.service | intcomma | capfirst}} /Day</span>
+                <span class="float-right"
+                  >$ {{listing.service | intcomma | capfirst}} /Day</span
+                >
               </li>
               <li class="list-group-item text-secondary">
                 <i class="fas fa-bed"></i> Rooms:
-                <span> {{listing.rooms}} </span>
+                <span class="float-right"> {{listing.rooms}} </span>
+              </li>
+              <li class="list-group-item text-secondary">
+                <i class="fas fa-bed"></i> Room Type:
+                <span class="float-right">{{listing.room_type}}</span>
+              </li>
+              <li class="list-group-item text-secondary">
+                <i class="fas fa-bath"></i> Services:
+                <span class="float-right">{{listing.services}}</span>
+              </li>
+              <li class="list-group-item text-secondary">
+                <i class="fas fa-dumbbell"></i> Profession:
+                <span class="float-right"> {{listing.profession}} </span>
+              </li>
+              <li class="list-group-item text-secondary">
+                <i class="fas fa-dumbbell"></i> Address:
+                <span class="float-right"> {{listing.address}} </span>
               </li>
             </ul>
           </div>
