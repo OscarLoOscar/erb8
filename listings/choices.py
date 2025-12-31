@@ -19,6 +19,9 @@ district_choices = {
   "Wan Chai":"Wan Chai",
 }
 
+sorted_districts = sorted(district_choices.items(),key= lambda x:x[1])
+
+
 bedroom_choices = {
   '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10
 }

@@ -1,7 +1,8 @@
 from django.shortcuts import render,get_object_or_404
 from listings.models import Listing
 from django.core.paginator import Paginator
-from listings.choices import district_choices,bedroom_choices,room_type_choices
+from django.db.models import Q
+from listings.choices import sorted_districts,bedroom_choices,room_type_choices
 # Create your views here.
 # 3.最終分黎呢度，2個endpoint
 def listings(request):
@@ -28,8 +29,12 @@ def search(request):
   if 'keywords' in request.GET:
     keywords = request.GET['keywords']
     if keywords:
-      queryset_list = queryset_list.filter(title__icontains=keywords)
-  
+      # queryset_list = queryset_list.filter(title__icontains=keywords)
+      queryset_list = queryset_list.filter(
+                Q(title__icontains=keywords) | 
+                Q(description__icontains=keywords)|
+                Q(doctor__name__icontains=keywords) # use double '_' to connect doctor and name
+            )
   # filter district
   if 'district' in request.GET:
     district = request.GET['district']
@@ -49,7 +54,7 @@ def search(request):
       queryset_list = queryset_list.filter(room_type__iexact=room_type)
 
   context = {
-        'district_choices': district_choices,
+        'sorted_districts': sorted_districts,
         'bedroom_choices': bedroom_choices,
         'room_type_choices': room_type_choices,
         'listings':queryset_list,

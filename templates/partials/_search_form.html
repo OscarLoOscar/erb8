@@ -12,42 +12,46 @@
                   name="keywords"
                   class="form-control"
                   placeholder="Keyword (Clinic, Doctor, etc)"
+                  value="{{ values.keywords}}"
                 />
               </div>
             </div>
+
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <select name="district" class="form-control">
                   <option selected="true" disabled="disabled">
                     District (All)
-                  </option>
-                  {% for key, value in district_choices.items %}
-                  <option value="{{ key }}">
-                    {% if key == values.district %}{% endif%} {{ value}}
+                  </option>{% for key, value in sorted_districts %}
+                  <option value="{{ key }}" {% if key == values.district %} selected {% endif %}>
+                  {{ value }}
                   </option>
                   {% endfor %}
                 </select>
               </div>
+
               <div class="col-md-4 mb-3">
                 <select name="rooms" class="form-control">
                   <option selected="true" disabled="disabled">
                     Rooms (All)
                   </option>
                   {% for key, value in bedroom_choices.items %}
-                  <option value="{{ key }}">
-                    {% if key == values.rooms %}{% endif%} {{ value }}
+                  <option value="{{ key }}"
+                    {% if key == values.rooms %} selected {% endif%}>
+                    {{ value }}
                   </option>
                   {% endfor %}
                 </select>
               </div>
+
               <div class="col-md-4 mb-3">
                 <select name="room_type" class="form-control">
                   <option selected="true" disabled="disabled">
                     Room Type (All)
                   </option>
                   {% for key, value in room_type_choices.items %}
-                  <option value="{{ key }}">
-                    {% if key == values.room_type %}{% endif%} {{value}}
+                  <option value="{{ key }}"
+                    {% if key == values.room_type %}selected{% endif%}> {{value}}
                   </option>
                   {% endfor %}
                 </select>
