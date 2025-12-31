@@ -23,7 +23,7 @@
                   <option selected="true" disabled="disabled">
                     District (All)
                   </option>{% for key, value in sorted_districts %}
-                  <option value="{{ key }}" {% if key == values.district %} selected {% endif %}>
+                  <option value="{{ key }}" {% if key == values.district %} selected = "true" {% endif %}>
                   {{ value }}
                   </option>
                   {% endfor %}
