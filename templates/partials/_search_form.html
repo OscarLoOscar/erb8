@@ -1,0 +1,64 @@
+<section id="showcase">
+  <div class="container text-center">
+    <div class="home-search p-5">
+      <div class="overlay p-5">
+        <h1 class="display-4 mb-4">Clinic Search</h1>
+        <div class="search">
+          <form action="{% url 'listings:search' %}">
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <input
+                  type="text"
+                  name="keywords"
+                  class="form-control"
+                  placeholder="Keyword (Clinic, Doctor, etc)"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <select name="district" class="form-control">
+                  <option selected="true" disabled="disabled">
+                    District (All)
+                  </option>
+                  {% for key, value in district_choices.items %}
+                  <option value="{{ key }}">
+                    {% if key == values.district %}{% endif%} {{ value}}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <select name="rooms" class="form-control">
+                  <option selected="true" disabled="disabled">
+                    Rooms (All)
+                  </option>
+                  {% for key, value in bedroom_choices.items %}
+                  <option value="{{ key }}">
+                    {% if key == values.rooms %}{% endif%} {{ value }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <select name="room_type" class="form-control">
+                  <option selected="true" disabled="disabled">
+                    Room Type (All)
+                  </option>
+                  {% for key, value in room_type_choices.items %}
+                  <option value="{{ key }}">
+                    {% if key == values.room_type %}{% endif%} {{value}}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-block mt-4" type="submit">
+              Submit form
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

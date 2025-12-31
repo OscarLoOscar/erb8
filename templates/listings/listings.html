@@ -26,7 +26,7 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               {% comment %} 去個home，所以pages，not listings {% endcomment %}
-              <a href="{% url 'pages:index'%}"><i class="fas fa-home"></i> Home</a>
+              <a href={% url 'pages:index'%}><i class="fas fa-home"></i> Home</a>
             </li>
             <li class="breadcrumb-item active">Browse Listings</li>
           </ol>
@@ -47,13 +47,13 @@
               <img
                 class="card-img-top"
                 src="{{ listing.photo_main.url}}"
-                alt="{{listing.title}}"
+                alt="{{listing.title | title}}"
               />
               <div class="card-img-overlay">
               </div>
               <div class="card-body">
                 <div class="listing-heading text-center">
-                  <h4 class="text-primary">{{listing.title}}</h4>
+                  <h4 class="text-primary">{{listing.title | title}}</h4>
                   <p>
                     <i class="fas fa-map-marker text-secondary"></i> {{listing.district}}
                   </p>
@@ -61,11 +61,10 @@
                 <hr />
                 <div class="row py-2 text-secondary">
                   <div class="col-6">
-                    {% comment %} <i class="fas fa-th-large"></i> Fee : {{listing.service | apnumber | capfirst}} {% endcomment %}
-                    <i class="fas fa-th-large"></i> Fee : {{listing.service |                     <i class="fas fa-th-large"></i> Fee : {{listing.service | apnumber | capfirst}} | capfirst}}
+                    <i class="fas fa-th-large"></i> Fee : {{listing.service | apnumber | capfirst}}
                   </div>
                   <div class="col-6">
-                    <i class="fas fa-dumbbell"></i> {{listing.profession}} 
+                    <i class="fas fa-dumbbell"></i> Treatment 
                   </div>
                 </div>
                 <div class="row py-2 text-secondary">
@@ -78,7 +77,7 @@
                 </div>
                 <hr />
                 <div class="row py-2 text-secondary">
-                  <div class="col-12"><i class="fas fa-user"></i> {{listing.doctor.name}}</div>
+                  <div class="col-12"><i class="fas fa-user"></i> {{listing.doctor}}</div>
                 </div>
                 <div class="row text-secondary pb-2">
                   <div class="col-12">
@@ -125,8 +124,7 @@
                   </li>
                 {% else %}
                   <li class="page-item">
-                    {% comment %} <a class="page-link" href="?page={{i}}">{{i}}</a> {% endcomment %}
-                    <a class="page-link" href="?page={{i}}&district={{request.GET.district}}">{{i}}</a>
+                    <a class="page-link" href="?page={{i}}">{{i}}</a>
                   </li>
                 {% endif%}
               {% endfor%}
