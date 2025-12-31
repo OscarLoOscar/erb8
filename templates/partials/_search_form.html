@@ -22,13 +22,24 @@
                 <select name="district" class="form-control">
                   <option selected="true" disabled="disabled">
                     District (All)
-                  </option>{% for key, value in sorted_districts %}
+                  </option>
+                  {% comment %} {% for key, value in  %}
                   <option value="{{ key }}" {% if key == values.district %} selected = "true" {% endif %}>
                   {{ value }}
                   </option>
                   {% endfor %}
-                </select>
-              </div>
+                </select> {% endcomment %}
+                {% for region,districts in district_groups.items %}
+                <optgroup label="{{region}}"> 
+                  {% for key,value in districts.items %}
+                  <option value="{{value}}" {%if value == values.district%} selected = "true" {%endif%}>
+                    {{value}}
+                  </option>
+                  {% endfor%}
+                </optgroup>
+                {%endfor%}
+              </select>
+            </div>
 
               <div class="col-md-4 mb-3">
                 <select name="rooms" class="form-control">
