@@ -20,7 +20,8 @@
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <select name="district" class="form-control">
-                  <option selected="true" disabled="disabled">
+                  {% comment %} <option selected="true" disabled="disabled"> {% endcomment %}
+                  <option {% if not values.district %}selected="true" value="" {% endif%}> <!-- 如果無選擇>>empty value>>Not True>>著左做True>>出value="" -->
                     District (All)
                   </option>
                   {% comment %} {% for key, value in  %}
@@ -29,11 +30,14 @@
                   </option>
                   {% endfor %}
                 </select> {% endcomment %}
-                {% for region,districts in district_groups.items %}
+                {% for region,districts in district_groups_choices %}
                 <optgroup label="{{region}}"> 
-                  {% for key,value in districts.items %}
-                  <option value="{{value}}" {%if value == values.district%} selected = "true" {%endif%}>
+                  {% for key,value in districts %}
+                  {% comment %} <option value="{{value}}" {%if value == values.district%} selected = "true" {%endif%}>
                     {{value}}
+                  </option> {% endcomment %}
+                  <option value="{{value}}" {%if value == values.district%} selected = "true" {%endif%}>
+                    {{ value }}
                   </option>
                   {% endfor%}
                 </optgroup>
@@ -43,7 +47,8 @@
 
               <div class="col-md-4 mb-3">
                 <select name="rooms" class="form-control">
-                  <option selected="true" disabled="disabled">
+                  {% comment %} <option selected="true" disabled="disabled"> {% endcomment %}
+                  <option {% if not values.rooms %}selected="true" value="" {% endif%}> <!--Result : 出番Rooms (All)-->
                     Rooms (All)
                   </option>
                   {% for key, value in bedroom_choices.items %}
@@ -57,7 +62,8 @@
 
               <div class="col-md-4 mb-3">
                 <select name="room_type" class="form-control">
-                  <option selected="true" disabled="disabled">
+                  {% comment %} <option selected="true" disabled="disabled"> {% endcomment %}
+                  <option {% if not values.room_type %}selected="true" value="" {% endif%}>
                     Room Type (All)
                   </option>
                   {% for key, value in room_type_choices.items %}

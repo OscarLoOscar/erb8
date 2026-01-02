@@ -14,6 +14,7 @@ import os
 import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,7 +52,8 @@ DJANGO_APPS = [
 # 註冊地方,先可以係localhost/admin見到
 APPLICATION_APPS = ['pages.apps.PagesConfig',
                     'doctors.apps.DoctorsConfig',
-                    'listings.apps.ListingsConfig'
+                    'listings.apps.ListingsConfig',
+                    'accounts.apps.AccountsConfig'
                     ]
 
 THIRD_PARTY_APPS = ['debug_toolbar']# 裝完 django-debug-toolbar手動加, for development用
@@ -162,3 +164,8 @@ MEDIA_URL = '/media/'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+MESSAGE_TAG = {
+    messages.ERROR: 'danger',
+    messages.SUCCESS: 'success',
+}

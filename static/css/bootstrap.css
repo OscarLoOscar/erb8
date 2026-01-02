@@ -3803,6 +3803,13 @@ input[type="button"].btn-block {
 .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
+  transition: color 0.3s;
+  border-bottom: 2px solid transparent;
+}
+.navbar-nav .nav-item.active .nav-link {
+    font-weight: normal !important; /* 強制不變粗 */
+    color: #fff !important;         /* 亮白色著燈 */
+    border-bottom: 2px solid #fff;  /* 或者用底線著燈 */
 }
 .navbar-nav .dropdown-menu {
   position: static;

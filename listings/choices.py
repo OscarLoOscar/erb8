@@ -48,6 +48,13 @@ district_groups = {
     }
 }
 
+district_groups_choices = []
+for region , districts in district_groups.items():
+  group_list=[]
+  for code,name in districts.items():
+    group_list.append((code,name))
+  district_groups_choices.append((region,tuple(group_list)))
+  
 bedroom_choices = {
   '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10
 }

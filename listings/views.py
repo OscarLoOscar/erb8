@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from listings.models import Listing
 from django.core.paginator import Paginator
 from django.db.models import Q
-from listings.choices import district_groups,bedroom_choices,room_type_choices
+from listings.choices import district_groups_choices,bedroom_choices,room_type_choices
 # Create your views here.
 # 3.最終分黎呢度，2個endpoint
 def listings(request):
@@ -25,9 +25,9 @@ def search(request):
   # get all data
   queryset_list = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-  sorted_district_groups = {}
-  for region , districts in district_groups.items():
-    sorted_district_groups[region] = sorted(districts.items(),key = lambda x:x[1])
+  # sorted_district_groups = {}
+  # for region , districts in district_groups_choices.items():
+  #   sorted_district_groups[region] = sorted(districts.items(),key = lambda x:x[1])
   # filter keywords
   if 'keywords' in request.GET:
     keywords = request.GET['keywords']
@@ -56,11 +56,16 @@ def search(request):
     if room_type:
       queryset_list = queryset_list.filter(room_type__iexact=room_type)
 
+  paginator = Paginator(queryset_list,3)
+  page = request.GET.get('page')
+  page_listings = paginator.get_page(page)
+
   context = {
-        'district_groups': sorted_district_groups,
+        'listings':page_listings,
+        'district_groups_choices': district_groups_choices,
         'bedroom_choices': bedroom_choices,
         'room_type_choices': room_type_choices,
-        'listings':queryset_list,
+        # 'listings':queryset_list,
         'values':request.GET
     }
   return render(request,'listings/search.html',context)

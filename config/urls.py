@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # define endpoint
+# 多人用放上面
 from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
@@ -24,8 +25,9 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 # empty string + empty string 既分流，但無得用empty string，所以起個folder： pages
 urlpatterns = [
     path('',include('pages.urls',namespace='pages')),
+    path('listings/', include('listings.urls',namespace='listings')),
+    path('accounts/',include('accounts.urls',namespace='accounts')),
     path('admin/', admin.site.urls),
-    path('listings/', include('listings.urls',namespace='listings')) 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) + debug_toolbar_urls() # 要同一行，隔行會error
     
 admin.site.site_header = 'Clinic Administration'

@@ -2,8 +2,7 @@ from django.shortcuts import render
 # from django.http import HttpResponse
 from listings.models import Listing
 from doctors.models import Doctor
-from listings.choices import district_groups,bedroom_choices,room_type_choices
-
+from listings.choices import district_groups_choices, bedroom_choices, room_type_choices
 # Create your views here.
 # 3.最終分黎呢度，2個endpoint
 # def index(request):
@@ -13,8 +12,9 @@ from listings.choices import district_groups,bedroom_choices,room_type_choices
 def index(request):
   # listings = Listing.objects.all() # 大階Listing，拎data model，all() -> 同DB溝通，拎晒所有data
   listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3] # [:3] -> list -> 0,1,2
-  context = {'listings' : listings,
-    'district_groups': district_groups,
+  context = {
+    'listings' : listings,
+    'district_groups_choices': district_groups_choices,
     'bedroom_choices':bedroom_choices,
     'room_type_choices':room_type_choices
 }
