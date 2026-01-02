@@ -28,7 +28,10 @@ def register(request):
           messages.error(request,"Email already exists.")
           return redirect("accounts:register")
         else:
-          pass
+          user = User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name)
+          user.save()
+          messages.success(request,'You are now registered and can login.')
+          return redirect("accounts:login")
     else:
       messages.error(request,'Passwords do not match')
       return redirect("accounts:register")
