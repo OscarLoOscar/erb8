@@ -24,7 +24,11 @@ def register(request):
         messages.error(request,"Username already exists.")
         return redirect("accounts:register")
       else:
-        pass
+        if User.objects.filter(email=email).exists():
+          messages.error(request,"Email already exists.")
+          return redirect("accounts:register")
+        else:
+          pass
     else:
       messages.error(request,'Passwords do not match')
       return redirect("accounts:register")
