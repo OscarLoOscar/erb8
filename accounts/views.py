@@ -11,7 +11,7 @@ def logout(request):
   return render(request,'accounts/logout.html')
 
 def register(request):
-  if register.method == 'POST':
+  if request.method == 'POST':
     # handle registration logic here
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
@@ -35,7 +35,6 @@ def register(request):
     else:
       messages.error(request,'Passwords do not match')
       return redirect("accounts:register")
-    pass
   else:
     return render(request,'accounts/register.html')
 
