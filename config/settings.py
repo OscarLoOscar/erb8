@@ -45,7 +45,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',# 裝完 django-debug-toolbar
-    'clinic_app', # 加啱啱起既startapp XX(project name)
+    # 'clinic_app', # 加啱啱起既startapp XX(project name)
     'django.contrib.humanize',
 ]
 
@@ -53,7 +53,8 @@ DJANGO_APPS = [
 APPLICATION_APPS = ['pages.apps.PagesConfig',
                     'doctors.apps.DoctorsConfig',
                     'listings.apps.ListingsConfig',
-                    'accounts.apps.AccountsConfig'
+                    'accounts.apps.AccountsConfig',
+                    'contacts.apps.ContactsConfig'
                     ]
 
 THIRD_PARTY_APPS = ['debug_toolbar']# 裝完 django-debug-toolbar手動加, for development用
@@ -165,7 +166,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-MESSAGE_TAG = {
+MESSAGE_TAGS = {
     messages.ERROR: 'danger',
     messages.SUCCESS: 'success',
 }

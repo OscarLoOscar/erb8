@@ -25,8 +25,13 @@
     {% include 'partials/_topbar.html' %}
     <!--  navbar -->
     {% include 'partials/_navbar.html' %}
+    <div class="container mt-2">
+      {% include 'partials/_alert.html'%}
+    </div>
     <!--  content -->
-    {% block content %} {% endblock %}
+    <main>
+      {% block content %} {% endblock %}
+    </main>
     <!--  footer -->
     {% include 'partials/_footer.html' %}
 
