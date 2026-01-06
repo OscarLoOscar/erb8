@@ -13,7 +13,7 @@
           <div class="mb-3">
             {% comment %} expression : {% endcomment %}
             {{form.message | add_label_class:'form-label'}}
-            <!-- ignore-prettier -->
+            <!-- form-error -->
             {% if form.message.errors %}
             <div class="text-danger mb-2">
               {{form.message.errors}}

@@ -58,7 +58,7 @@ APPLICATION_APPS = ['pages.apps.PagesConfig',
                     'widget_tweaks',
                     ]
 
-THIRD_PARTY_APPS = ['debug_toolbar']# 裝完 django-debug-toolbar手動加, for development用
+THIRD_PARTY_APPS = ['debug_toolbar','taggit']# 裝完 django-debug-toolbar手動加, for development用
 
 INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS + THIRD_PARTY_APPS
 
