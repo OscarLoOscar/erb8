@@ -24,6 +24,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
+              {% comment %} a-link is MVT - view {% endcomment %}
               <a href="{% url 'pages:index'%}"> 
                 <i class="fas fa-home"></i> Home</a>
             </li>
@@ -72,6 +73,11 @@
                     data-id="{{contact.id}}"
                     {% comment %} data-id 既contact.id入份去data-url {% endcomment %}
                     >Delete Listing</button>
+                    <a href ="{% url 'contacts:edit_contact' contact.id%}" 
+                    class="btn btn-success"
+                    >Edit Message</a>
+                    {% comment %} 用Django form黎做edit_contact {% endcomment %}
+                    
                   </td>
                   {% comment %} data:create一個data value, internal variable,帶住value去番backend {% endcomment %}
                 </tr>
