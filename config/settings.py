@@ -54,7 +54,8 @@ APPLICATION_APPS = ['pages.apps.PagesConfig',
                     'doctors.apps.DoctorsConfig',
                     'listings.apps.ListingsConfig',
                     'accounts.apps.AccountsConfig',
-                    'contacts.apps.ContactsConfig'
+                    'contacts.apps.ContactsConfig',
+                    'widget_tweaks',
                     ]
 
 THIRD_PARTY_APPS = ['debug_toolbar']# 裝完 django-debug-toolbar手動加, for development用
