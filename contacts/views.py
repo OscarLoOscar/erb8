@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Contact
 from django.contrib import messages
 # Create your views here.
@@ -23,7 +23,19 @@ def contacts(request):
   return render(request,'listings/listings.html')
 
 def delete_contact(request,contact_id):
-  return redirect(request,'accounts/dashboard' )
+  # contact = Contact.objects.get(id=contact_id)
+  # contact.delete()
+  # messages.success(request,'Contact deleted successfully.')
+  contact = get_object_or_404(Contact,id=contact_id)
+  contact.delete()
+  # 唔放message原因： 因為已經係modal confirm左delete, 再放message會重覆
+  return redirect('accounts:dashboard')
 
 def edit_contact(request,contact_id):
-  return redirect(request,'accounts/dashboard' )
+  contact = Contact.objects.get(id=contact_id)
+  # if request.method == "POST":
+  
+  return redirect('accounts:dashboard')
+# in Django
+# render(request, 'template.html', context)：必須要放 request。
+# redirect('url_name')：絕對唔可以放 request 喺第一個位。
