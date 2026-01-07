@@ -1,6 +1,7 @@
 {% if messages %}
 {% for message in messages%}
-<div class="container" id="message">
+{% comment %} <div class="container" id="message"> {% endcomment %}
+  <div class="container" class="message">
   {% comment %} <div class="alert alert-dismissible text-center alert-{{message.tags}}" role="alert"> {% endcomment %}
   <div class="alert alert-dismissible text-center alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}" role="alert">
     <button class ="close" type="button" data-dismiss="alert">

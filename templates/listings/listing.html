@@ -37,7 +37,6 @@
     </nav>
   </div>
 </section>
-{% include 'partials/_alert.html' %}
 
 <!-- Listing -->
 <section id="listing" class="py-4">
@@ -219,9 +218,9 @@
           value="{{listing.doctor.email}}"/>
           {% if user.is_authenticated %}
           <!-- start of take care input form -->
-          <input type="hidden" name="user_id" value="{{ user.id }}">
+            <input type="hidden" name="user_id" value="{{ user.id }}">
           {% else %}
-          <input type="hidden" name="0"/>
+            <input type="hidden" name="0"/>
           {% endif%}
           <!-- end of take care input form -->
         {% comment %} <input type="hidden" name="listing_id" value="{{listing.id}}" /> {% endcomment %}

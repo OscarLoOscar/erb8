@@ -12,12 +12,12 @@ def contacts(request):
     email = request.POST['email']
     phone = request.POST['phone']
     message = request.POST['message']
-    user_id = request.POST['user_id']
+    user_id = request.POST.get('user_id','0')
     doctor_email = request.POST['doctor_email']
 
     if not doctor_email:
       doctor_email = "freetousegpt@gmail.com"
-      
+
     if request.user.is_authenticated:
       has_contacted = Contact.objects.all().filter(listing_id=listing_id,user_id=user_id)
       if has_contacted:
@@ -37,7 +37,8 @@ def contacts(request):
       # =====
       messages.success(request,'Your request has been submitted, a realtor will get back to you soon')
       return redirect('listings:listing', listing_id=listing_id)
-  return render(request,'listings/listings.html')
+  # return redirect(request,'listings/listings.html')
+  return redirect('listings:index')
 
 def delete_contact(request,contact_id):
   # contact = Contact.objects.get(id=contact_id)
