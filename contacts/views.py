@@ -13,30 +13,27 @@ def contacts(request):
     phone = request.POST['phone']
     message = request.POST['message']
     user_id = request.POST.get('user_id','0')
-    doctor_email = request.POST['doctor_email']
-
-    if not doctor_email:
-      doctor_email = "freetousegpt@gmail.com"
+    doctor_email = request.POST.get('doctor_email','freetousegpt@gmail.com')
 
     if request.user.is_authenticated:
       has_contacted = Contact.objects.all().filter(listing_id=listing_id,user_id=user_id)
-      if has_contacted:
+      if has_contacted.exists():
         messages.error(request,'You have already made an inquiry for this listing')
         return redirect('listings:listing', listing_id=listing_id)
-      contact = Contact(listing=listing,listing_id=listing_id,name=name,email=email,phone=phone,message=message,user_id=user_id)
-      contact.save()
+    
+    contact = Contact(listing=listing,listing_id=listing_id,name=name,email=email,phone=phone,message=message,user_id=user_id)
+    contact.save()
       # ==== send mail function
-      send_mail(
+    send_mail(
           'Clinic Inquiry', # title 
-          'There has been abn inquiry for ' + listing + # content
-          ' . Sign into the admin panel for more info', # content
+          f'There has been abn inquiry for {listing} . Sign into the admin panel for more info', # content
           'freetousegpt@gmail.com', # from email 
           [doctor_email], # to email , need array / list
           fail_silently=False
-      )
+    )
       # =====
-      messages.success(request,'Your request has been submitted, a realtor will get back to you soon')
-      return redirect('listings:listing', listing_id=listing_id)
+    messages.success(request,'Your request has been submitted, a realtor will get back to you soon')
+    return redirect('listings:listing', listing_id=listing_id)
   # return redirect(request,'listings/listings.html')
   return redirect('listings:index')
 
