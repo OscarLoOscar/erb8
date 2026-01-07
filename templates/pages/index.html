@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 <!-- load humanize-->
 {% load humanize %}
+<!-- tab title-->
+<!-- block content外面加，唔好入面加-->
+{% block title %} | Welcome {% endblock %}
 <!-- index main content-->
 {% block content %} {% include 'partials/_search_form.html' %}
-
 <section id="listings" class="py-5">
   <div class="container">
     <h3 class="text-center mb-3">Inpatient medical services</h3>
@@ -32,7 +34,8 @@
                 Fee : {{listing.service|apnumber| capfirst}}
               </div>
               <div class="col-6">
-                <i class="fas fa-dumbbell"></i> {{ listing.services }}
+                {% comment %} <i class="fas fa-dumbbell"></i> {{ listing.services }} {% endcomment %}
+                <i class="fas fa-dumbbell"></i> {{ listing.tag_list }}
               </div>
             </div>
             <div class="row py-2 text-secondary">

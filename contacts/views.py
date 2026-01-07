@@ -2,9 +2,10 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import Contact
 from django.contrib import messages
 from .forms import ContactForm
+from django.core.mail import send_mail
 # Create your views here.
 def contacts(request):
-  if request=="POST":
+  if request.method =="POST":
     listing = request.POST['listing']
     listing_id = request.POST['listing_id']
     name = request.POST['name']
@@ -12,13 +13,28 @@ def contacts(request):
     phone = request.POST['phone']
     message = request.POST['message']
     user_id = request.POST['user_id']
+    doctor_email = request.POST['doctor_email']
+
+    if not doctor_email:
+      doctor_email = "freetousegpt@gmail.com"
+      
     if request.user.is_authenticated:
       has_contacted = Contact.objects.all().filter(listing_id=listing_id,user_id=user_id)
       if has_contacted:
         messages.error(request,'You have already made an inquiry for this listing')
-        return redirect('listing:listing', listing_id=listing_id)
+        return redirect('listings:listing', listing_id=listing_id)
       contact = Contact(listing=listing,listing_id=listing_id,name=name,email=email,phone=phone,message=message,user_id=user_id)
       contact.save()
+      # ==== send mail function
+      send_mail(
+          'Clinic Inquiry', # title 
+          'There has been abn inquiry for ' + listing + # content
+          ' . Sign into the admin panel for more info', # content
+          'freetousegpt@gmail.com', # from email 
+          [doctor_email], # to email , need array / list
+          fail_silently=False
+      )
+      # =====
       messages.success(request,'Your request has been submitted, a realtor will get back to you soon')
       return redirect('listings:listing', listing_id=listing_id)
   return render(request,'listings/listings.html')

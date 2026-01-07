@@ -3,6 +3,8 @@
 {% load humanize %}
 <!-- load humanize-->
 {% load static %}
+<!-- block title-->
+{% block title %} | {{listing.title | title}} {% endblock %}
 <!-- block content-->
 {% block content %}
 
@@ -124,6 +126,44 @@
             </ul>
           </div>
         </div>
+        {% comment %} 07/01/2026 , 加tag show profession {% endcomment %}
+
+        <!-- profession -->
+        <div>
+        <div class="row mb-5">
+            {% comment %} h4.mr-3.text-secondary{Professions:} {% endcomment %}
+          {% comment %} <div class="col-md-4 d-flex align-items-start"> {% endcomment %}
+          <h4 class="mr-3 text-secondary">Professions:</h4>
+          {% if listing.profession.all %}
+            <ul>
+              {% for profession in listing.profession.all %}
+              <li class="mr-3">
+                <h4>{{profession.name}}</h4>
+              </li>
+              {% endfor %}
+            </ul>
+          {% comment %} follow listings/models.py field name {% endcomment %}
+          {% else %}
+            <p class="text-secondary">No Professions Listed</p>
+          {% endif %}
+        </div>
+        {% comment %} </div> {% endcomment %}
+
+        <!-- Services -->
+        <div class="row mb-5">
+          <h4 class="mr-3 text-secondary">Services :</h4>
+          {% if listings.services.all %}
+          <!-- service tag-->
+          <ul>
+            {% for service in listings.services.all %}
+            <li class="mr-3"><h4>{{service.name | title}}</h4></li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <h4>No Services</h4>
+          {% endif %}
+        </div>
+      </div>
 
         <!-- Description -->
         <div class="row mb-5 text-center">
@@ -133,6 +173,7 @@
           </div>
         </div>
       </div>
+      <!-- Make Inquiry -->
       <div class="col-md-3">
         <div class="card mb-3">
           <img
@@ -169,6 +210,13 @@
       </div>
       <div class="modal-body">
         <form method="POST" action="{% url 'contacts:contact' %}">
+          {% csrf_token %}
+          <input type="hidden" name="doctor_email" value="{{ listing.doctor.email }}">
+          <input type="hidden" name="listing_id" value="{{listing.id}}" />
+          <input 
+          type="hidden" 
+          class="doctor_email"
+          value="{{listing.doctor.email}}"/>
           {% if user.is_authenticated %}
           <!-- start of take care input form -->
           <input type="hidden" name="user_id" value="{{ user.id }}">
@@ -176,8 +224,7 @@
           <input type="hidden" name="0"/>
           {% endif%}
           <!-- end of take care input form -->
-        {% csrf_token %}
-        <input type="hidden" name="listing_id" value="{{listing.id}}" />
+        {% comment %} <input type="hidden" name="listing_id" value="{{listing.id}}" /> {% endcomment %}
           <div class="form-group">
             <label for="listing" class="col-form-label">Clinic:</label>
             <input

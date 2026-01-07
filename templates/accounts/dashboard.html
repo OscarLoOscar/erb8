@@ -3,6 +3,8 @@
 {% load humanize %}
 <!-- load humanize-->
 {% comment %} {% load static %} {% endcomment %}
+<!-- block title-->
+{% block title %} | {{user.username}}  {% endblock %}
 <!--load static -->
 {% block content %}
 

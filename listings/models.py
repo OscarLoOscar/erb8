@@ -33,8 +33,9 @@ class Listing(models.Model):
     return self.title
   
   def tag_list(self):
-    return u", ".join(tag.name for tag in self.services.all())
-  
+    # return u", ".join(tag.name.replace(" ","-") for tag in self.services.all())
+    return u", ".join(tag.slug for tag in self.services.all())
+
   class Meta:
     ordering = ['-list_date']
     indexes = [models.Index(fields = ['list_date'])]
